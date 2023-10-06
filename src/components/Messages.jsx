@@ -1,9 +1,17 @@
 import React from 'react'
+import Message from './Message'
 // import Add from "../img/addAvatar.png"
-const Sidebar = ()=>{
+const Messages = ()=>{
     return (
-        <h1>Sidebar</h1>
+        <div className="messages">
+            <Message/>
+            <Message/>
+            <Message/>
+            <Message/>
+            <Message/>
+            <Message/>
+        </div>
     )
 }
 
-export default Sidebar
+export default Messages

@@ -1,9 +1,21 @@
 import React from 'react'
 // import Add from "../img/addAvatar.png"
-const Sidebar = ()=>{
+import Attach from "../img/attach.png"
+import Img from '../img/img.png'
+const Input = ()=>{
     return (
-        <h1>Sidebar</h1>
+        <div className="input">
+            <input type="text" placeholder='Type Something' />
+            <div className="send">
+                <img src={Attach} alt="" />
+                <input type="file" style={{display:"none"}} id="file" />
+                <label htmlFor="file">
+                    <img src={Img} alt="" />
+                </label>
+                <button>Send</button>
+            </div>
+        </div>
     )
 }
 
-export default Sidebar
+export default Input
