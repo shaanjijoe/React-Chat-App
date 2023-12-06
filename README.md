@@ -37,14 +37,3 @@ const firebaseConfig = {
 };
 
 export default firebaseConfig;
-```
-
-## Contributing
-
-Contributions are welcome! If you have any suggestions, bug reports, or improvements, feel free to open an issue or create a pull request.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-Happy chatting! 🚀
