@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../firebase";
-import { doc, setDoc } from "firebase/firestore";
+// import { doc, setDoc } from "firebase/firestore";
+import { collection, getDocs, query, where, doc, setDoc } from 'firebase/firestore';
 import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
@@ -28,6 +29,18 @@ const Register = () => {
     }
 
     try {
+      const q = query(collection(db, "users"), where('displayName', '==', displayName));
+    
+      const querySnapshot = await getDocs(q);
+
+      if(!querySnapshot.empty){
+        setErrorMessage('Username Taken. Choose another one');
+        setErr(true);
+        return;
+      }
+
+      // console.log(!querySnapshot.empty);
+
       //Create user
       const res = await createUserWithEmailAndPassword(auth, email, password);
       // console.log(res);

@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { FaCircleUser } from "react-icons/fa6";
 import {
   collection,
   query,
@@ -16,10 +17,22 @@ const Search = () => {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [err, setErr] = useState(false);
+  const [placeholder, setPlaceholder] = useState("Find a user");
 
   const { currentUser } = useContext(AuthContext);
 
   const handleSearch = async () => {
+    if(username ==="")
+      return;
+
+    if(username === currentUser.displayName){
+      setUsername("");
+      setPlaceholder("Self Search not allowed");
+      return;
+    }
+
+    setPlaceholder("Find a user");
+
     const q = query(
       collection(db, "users"),
       where("displayName", "==", username)
@@ -81,7 +94,7 @@ const Search = () => {
       <div className="searchForm">
         <input
           type="text"
-          placeholder="Find a user"
+          placeholder={placeholder}
           onKeyDown={handleKey}
           onChange={(e) => setUsername(e.target.value)}
           value={username}
@@ -90,7 +103,8 @@ const Search = () => {
       {err && <span>User not found!</span>}
       {user && (
         <div className="userChat" onClick={handleSelect}>
-          <img src={user.photoURL} alt="" />
+          {/* <img src={user.photoURL} alt="" /> */}
+          <FaCircleUser/>
           <div className="userChatInfo">
             <span>{user.displayName}</span>
           </div>

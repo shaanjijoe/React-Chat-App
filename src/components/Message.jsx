@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { ChatContext } from "../context/ChatContext";
+// import { ChatContext } from "../context/ChatContext";
+import { FaRegUserCircle } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 
 const Message = ({ message }) => {
   const { currentUser } = useContext(AuthContext);
-  const { data } = useContext(ChatContext);
+  // const { data } = useContext(ChatContext);
 
   const ref = useRef();
 
@@ -18,14 +20,7 @@ const Message = ({ message }) => {
       className={`message ${message.senderId === currentUser.uid && "owner"}`}
     >
       <div className="messageInfo">
-        <img
-          src={
-            message.senderId === currentUser.uid
-              ? currentUser.photoURL
-              : data.user.photoURL
-          }
-          alt=""
-        />
+        {message.senderId === currentUser.uid ? <FaRegUserCircle className="img"/>: <FaUserCircle className="img"/>}
         <span>just now</span>
       </div>
       <div className="messageContent">
