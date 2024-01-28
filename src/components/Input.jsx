@@ -1,18 +1,10 @@
 import React, { useContext, useState } from "react";
-// import Img from "../img/img.png";
 import { GrSend } from "react-icons/gr";
 import { RiImageAddFill } from "react-icons/ri";
-// import Attach from "../img/attach.png";
 import { IoMdAttach } from "react-icons/io";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
-import {
-  arrayUnion,
-  doc,
-  serverTimestamp,
-  Timestamp,
-  updateDoc,
-} from "firebase/firestore";
+import { arrayUnion, doc, serverTimestamp, Timestamp, updateDoc } from "firebase/firestore";
 import { db, storage } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
@@ -36,6 +28,7 @@ const Input = () => {
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            console.log(downloadURL);
             await updateDoc(doc(db, "chats", data.chatId), {
               messages: arrayUnion({
                 id: uuid(),
@@ -85,7 +78,6 @@ const Input = () => {
         value={text}
       />
       <div className="send">
-        {/* <img src={Attach} alt="" /> */}
         <IoMdAttach className="img"/>
         <input
           type="file"
@@ -94,10 +86,8 @@ const Input = () => {
           onChange={(e) => setImg(e.target.files[0])}
         />
         <label htmlFor="file">
-          {/* <img src={Img} alt="" /> */}
           <RiImageAddFill className="img"/>
         </label>
-        {/* <button onClick={handleSend}>Send</button> */}
         <GrSend className="sendbutton" onClick={handleSend}/>
       </div>
     </div>

@@ -7,6 +7,16 @@ import { FaUserCircle } from "react-icons/fa";
 const Message = ({ message }) => {
   const { currentUser } = useContext(AuthContext);
   // const { data } = useContext(ChatContext);
+  // console.log(message);
+  const timestamp = message.date;
+  const date = new Date(timestamp.seconds * 1000 + timestamp.nanoseconds / 1e6);
+
+  // Get HH:MM format
+  const timeString = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+  // console.log(timeString);
+  // let dat = new Date(message.date);
+  // console.log(dat);
 
   const ref = useRef();
 
@@ -21,7 +31,7 @@ const Message = ({ message }) => {
     >
       <div className="messageInfo">
         {message.senderId === currentUser.uid ? <FaRegUserCircle className="img"/>: <FaUserCircle className="img"/>}
-        <span>just now</span>
+        <span>{timeString}</span>
       </div>
       <div className="messageContent">
         <p>{message.text}</p>
